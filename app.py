@@ -32,6 +32,10 @@ class OutputStreamer(BaseCallbackHandler):
     async def on_llm_new_token(self, token: str, **kwargs):
         await self.websocket.send_text(token)
 
+@app.get("/")
+async def root():
+    return {"status": "ok"}
+    
 # WebSocket route
 @app.websocket("/ws/chat")
 async def websocket_endpoint(websocket: WebSocket):
